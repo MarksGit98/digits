@@ -1,10 +1,13 @@
 import "./App.css";
 import GameScreen from "./screens/GameScreen";
+
 function App() {
-  return (
-    <div className="App">
-      <GameScreen /> f
-    </div>
+  return ( <
+    div className = "App" >
+    <
+    GameScreen / >
+    <
+    /div>
   );
 }
 
