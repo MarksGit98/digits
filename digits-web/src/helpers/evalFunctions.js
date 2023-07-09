@@ -243,6 +243,15 @@ const checkIfAllOdd = (
   );
 };
 
+const checkIfAllNumbersSumToSomeNumber = (
+  number1,
+  number2,
+  number3,
+  someNumber
+) => {
+  return number1 + number2 + number3 === someNumber;
+};
+
 module.exports = {
   checkIfEven,
   checkIfOdd,
@@ -265,4 +274,5 @@ module.exports = {
   checkHowManyOdd,
   checkIfAllOdd,
   checkHowManyPerfectSquares,
+  checkIfAllNumbersSumToSomeNumber,
 };

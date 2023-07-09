@@ -1,0 +1,131 @@
+.GameScreen {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.number {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.input-box {
+  margin: 0 5px;
+  border-radius: 5%;
+
+  &.disabled {
+    border: 3px solid lightgray;
+
+    &.incorrect-guess {
+      background-color: #fff;
+      color: #000;
+    }
+
+    &.correct-guess {
+      background-color: orange;
+      color: #fff;
+    }
+  }
+
+  &.active {
+    border: 3px solid orange;
+  }
+}
+
+.separator {
+  width: 21px;
+  height: 3px;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  background-color: black;
+  border-bottom: 3px solid black;
+  /* border-width: 0 0 0 20px; */
+}
+
+input {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  padding: 5px;
+  font-size: 28px;
+
+  :disabled {
+    border: 10px solid red;
+  }
+}
+
+.check-guess {
+  padding: 10px 20px;
+  font-size: 24px;
+
+  &.active {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  &.disabled {
+    background-color: gray;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.clue-display {
+  background-color: #90ee90;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  height: 190px;
+  display: flex;
+  border: 5px solid green;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+
+  .clue {
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 5px 12px 5px;
+  }
+
+  .clue-number {
+    // -webkit-text-stroke: 3px black;
+
+    color: white;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 500;
+    padding-right: 5px;
+  }
+
+  .clue-text {
+    color: white;
+    font-size: 20px;
+    line-height: 26px;
+  }
+}

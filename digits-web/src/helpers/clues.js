@@ -19,6 +19,7 @@ import {
   checkHowManyPerfectSquares,
   checkIfSameDifferenceDivision,
   checkHowManyPrime,
+  checkIfAllNumbersSumToSomeNumber,
 } from "./evalFunctions";
 
 import {
@@ -70,6 +71,7 @@ import {
   DIGIT,
   NUMBER,
   DIGIT_AND_NUMBER,
+  DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
 } from "./constants";
 const numberToTextConversion = (number) => {
   let formattedNumber;
@@ -839,6 +841,148 @@ export const getAllApplicableClues = (answer) => {
         digit5,
         digit6,
       ]),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 25`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 25),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 30`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 30),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 40`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 40),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 50`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 50),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 60`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 60),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 70`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 70),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 80`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 80),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 90`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 90),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(NUMBER_TWO)} number sum to 75`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 75),
+    },
+    {
+      clue: `The ${numberToTextConversion(
+        NUMBER_ONE
+      )} number and the ${numberToTextConversion(
+        NUMBER_TWO
+      )} number sum to 100`,
+      used: false,
+      type: DO_NUMBERS_SUM_TO_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, 100),
+    },
+    {
+      clue: `All three numbers sum to 25`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 25),
+    },
+    {
+      clue: `All three numbers sum to 30`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 30),
+    },
+    {
+      clue: `All three numbers sum to 40`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 40),
+    },
+    {
+      clue: `All three numbers sum to 50`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 50),
+    },
+    {
+      clue: `All three numbers sum to 60`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 60),
+    },
+    {
+      clue: `All three numbers sum to 70`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 70),
+    },
+    {
+      clue: `All three numbers sum to 75`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 75),
+    },
+    {
+      clue: `All three numbers sum to 80`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 80),
+    },
+    {
+      clue: `All three numbers sum to 90`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 90),
+    },
+    {
+      clue: `All three numbers sum to 100`,
+      used: false,
+      type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+      evaluation: checkIfNumbersSum(number1, number2, number3, 100),
     },
   ];
 

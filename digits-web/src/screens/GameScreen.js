@@ -1,172 +1,210 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef, useMemo } from "react";
 import { puzzles } from "../puzzles/puzzles";
-import "./GameScreen.css";
+import "./GameScreen.scss";
 import { MAX_GUESS_AMOUNT } from "../helpers/constants";
 
-const Clue = ({ clues }) => (
-  <div>
-    {clues.map((clue, index) => (
-      <p>
-        {index + 1}) {clue}
-      </p>
-    ))}
-  </div>
+const NumberInput = forwardRef(
+  ({ value, onChange, disabled, onKeyDown }, ref) => (
+    <input
+      disabled={disabled}
+      ref={ref}
+      type="tel"
+      value={value}
+      onChange={onChange}
+      maxLength={1}
+      pattern="[0-9]*"
+      onKeyDown={onKeyDown}
+    />
+  )
 );
 
-const NumberInput = React.forwardRef(({ value, onChange, disabled }, ref) => (
-  <input
-    disabled={disabled}
-    ref={ref}
-    type="tel" 
-    value={value}
-    onChange={onChange}
-    maxLength={1} 
-    pattern="[0-9]*"
-  />
-));
-
-const GuessList = ({ guesses, answer }) => {
-  const formatGuess = (guess) => {
-    const formattedGuess = guess.split("-").map(Number);
-    return formattedGuess;
-  };
-
-
-  const getCorrectDigits = (guess) => {
-    const formattedGuess = formatGuess(guess);
-    const correctDigits = formattedGuess.map((digit, index) => {
-      if (digit === answer[index]) {
-        return true;
-      }
-      return false;
-    });
-    return correctDigits;
-  };
-
-  return (
-    <div className="GuessList">
-      <h2>Guesses</h2>
-      {guesses.length > 0 ? (
-        <ul className="guesses-list">
-          {guesses.map((guess, index) => (
-            <li key={index}>
-              {formatGuess(guess).map((digit, index) => (
-                <span
-                  key={index}
-                  className={`guess-number ${
-                    getCorrectDigits(guess)[index]
-                      ? "correct-guess"
-                      : "incorrect-guess"
-                  } ${
-                    (index + 1) % 2 === 0 && index + 1 !== answer.length
-                      ? "number-division"
-                      : null
-                  }`}
-                >
-                  {digit}
-                  {(index + 1) % 2 === 0 && index + 1 !== answer.length ? (
-                    <span className="guess-separator">-</span>
-                  ) : null}
-                </span>
-              ))}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No guesses yet.</p>
-      )}
-    </div>
-  );
-};
-
 const GameScreen = () => {
-  const inputRefs = useRef([null, null, null, null, null, null]);
+  const inputRefs = useRef([]);
+
   const generateRandomAnswer = () => {
     const puzzleIndex = Math.floor(Math.random() * puzzles.length);
     return puzzles[puzzleIndex].puzzle;
   };
 
+  const [currentInput, setCurrentInput] = useState(0);
   const [currentGuess, setCurrentGuess] = useState(1);
   const [guess, setGuess] = useState(["", "", "", "", "", ""]);
   const [clues, setClues] = useState([]);
   const [answer, setAnswer] = useState(generateRandomAnswer());
   const [guesses, setGuesses] = useState([]);
-  const [clueIndex, setClueIndex] = useState(0);
-  const [showFinalGuess, setShowFinalGuess] = useState(false);
 
   useEffect(() => {
     setClues(generateClues(answer));
   }, [answer]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const keyCode = event.keyCode || event.which;
+      const isNumberKey = keyCode >= 48 && keyCode <= 57; // Check if the pressed key is a number
+      if (isNumberKey && inputRefs.current.length) {
+        inputRefs.current[0].focus();
+      }
+
+      // Remove the event listener after it's been used
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (inputRefs.current.length) inputRefs.current[currentInput].focus();
+  }, [inputRefs, currentInput, guess]);
+
+  const ClueDisplay = ({ clues }) => (
+    <div className="clue-display">
+      {Array(MAX_GUESS_AMOUNT)
+        .fill("-")
+        .map((_, index) => (
+          <div className={"clue"} key={index}>
+            <div className={"clue-number"}>{index + 1}.</div>
+            <div className={"clue-text"}>
+              {index < currentGuess ? `${clues[index]}` : ""}
+            </div>
+          </div>
+        ))}
+    </div>
+  );
 
   const handleGuessChange = (index, event) => {
     const newGuess = [...guess];
     const inputValue = event.target.value;
 
     if (/^[0-9]$/.test(inputValue)) {
-      newGuess[index] = inputValue;
+      newGuess[index] = parseInt(inputValue);
       setGuess(newGuess);
 
-      if (index < inputRefs.current.length - 1) {
-        console.log('forward', inputRefs, index)
-        inputRefs.current[index + 1].focus();
+      if (index < MAX_GUESS_AMOUNT - 1) {
+        setCurrentInput(index + 1);
       }
     }
-
-    else if (event.nativeEvent.inputType === "deleteContentBackward") {
-      newGuess[index] = ''
-      setGuess(newGuess)
-      if (index > 0) {
-        inputRefs.current[index - 1].focus();
-      }
-    }
-
-    console.log(newGuess)
+    console.log(newGuess);
   };
 
-  const Number = ({ disabled, number }) => (
-    <div className="number">
-      <div className={`input-box ${disabled ? 'disabled' : 'active'}`} >
-        <NumberInput
-          disabled={disabled}
-          ref={!disabled ? (el) => (inputRefs.current[number * 2 - 2] = el): null}
-          value={!disabled ? guess[number * 2 - 2] : null}
-          onChange={(e) => handleGuessChange(number * 2 - 2, e)}
-        />
-      </div>
-      <div className="input-box">
-        <NumberInput
-          disabled={disabled}
-          ref={!disabled ? (el) => (inputRefs.current[number * 2 - 1] = el): null}
-          value={!disabled ? guess[number * 2 - 1] : null}
-          onChange={(e) => handleGuessChange(number * 2 - 1, e)}
-        />
-      </div>
-    </div>
-  );
+  const handleBackspace = (index, event) => {
+    if (event.key === "Backspace" || event.key === "Delete") {
+      const newGuess = [...guess];
+      if (newGuess[index] === "" && index > 0) {
+        setCurrentInput(index - 1);
+      }
+      newGuess[index] = "";
+      setGuess(newGuess);
 
-  const GuessRow = ({ active }) => (
+      console.log(newGuess);
+    }
+  };
+
+  const Number = ({ disabled, number, guessed, rowIndex }) => {
+    const firstIndex = number * 2 - 2;
+    const secondIndex = number * 2 - 1;
+
+    const isCorrectDigit = (guess, index) => {
+      return guess[index] === answer[index];
+    };
+
+    return (
+      <div className="number">
+        <div
+          className={`input-box ${disabled ? "disabled" : "active"} ${
+            guessed
+              ? isCorrectDigit(guesses[rowIndex], firstIndex)
+                ? "correct-guess"
+                : "incorrect-guess"
+              : null
+          }`}
+        >
+          <NumberInput
+            key={`${rowIndex} - ${firstIndex}`}
+            disabled={disabled}
+            ref={
+              !disabled ? (el) => (inputRefs.current[firstIndex] = el) : null
+            }
+            value={
+              !disabled
+                ? guess[firstIndex]
+                : guessed
+                ? guesses[rowIndex][firstIndex]
+                : ""
+            }
+            onChange={(e) => handleGuessChange(firstIndex, e)}
+            onKeyDown={(e) => handleBackspace(firstIndex, e)}
+          />
+        </div>
+        <div
+          className={`input-box ${disabled ? "disabled" : "active"} ${
+            guessed
+              ? isCorrectDigit(guesses[rowIndex], secondIndex)
+                ? "correct-guess"
+                : "incorrect-guess"
+              : null
+          }`}
+        >
+          <NumberInput
+            key={`${rowIndex} - ${secondIndex}`}
+            disabled={disabled}
+            ref={
+              !disabled ? (el) => (inputRefs.current[secondIndex] = el) : null
+            }
+            value={
+              !disabled
+                ? guess[secondIndex]
+                : guessed
+                ? guesses[rowIndex][secondIndex]
+                : ""
+            }
+            onChange={(e) => handleGuessChange(secondIndex, e)}
+            onKeyDown={(e) => handleBackspace(secondIndex, e)}
+          />
+        </div>
+      </div>
+    );
+  };
+
+  const GuessRow = ({ active, guessed, index }) => (
     <div className="input-container">
-      <Number disabled={!active} number={1} />
+      <Number
+        disabled={!active}
+        number={1}
+        guessed={guessed}
+        rowIndex={index}
+      />
       <div className="separator" />
-      <Number disabled={!active} number={2} />
+      <Number
+        disabled={!active}
+        number={2}
+        guessed={guessed}
+        rowIndex={index}
+      />
       <div className="separator" />
-      <Number disabled={!active} number={3} />
+      <Number
+        disabled={!active}
+        number={3}
+        guessed={guessed}
+        rowIndex={index}
+      />
     </div>
   );
 
   const checkGuess = () => {
-    const formattedGuess = guess.join(" - ");
-    const isCorrect = formattedGuess === answer.join(" - ");
+    const isCorrect = guess.every((value, index) => value === answer[index]);
     if (isCorrect) {
       alert("Congratulations! You guessed the correct answer!");
       setAnswer(generateRandomAnswer());
     } else {
-      handleClueDisplay();
-      alert("Sorry, your guess is incorrect. Please try again.");
-      setGuesses([...guesses, formattedGuess]);
+      setGuesses([...guesses, guess]);
     }
     setGuess(["", "", "", "", "", ""]);
-    setShowFinalGuess(true);
+    setCurrentGuess((currentGuess) => currentGuess + 1);
+    setCurrentInput(0);
   };
 
   const generateClues = (answer) => {
@@ -174,27 +212,32 @@ const GameScreen = () => {
     return puzzles[puzzleIndex].clues;
   };
 
-  const handleClueDisplay = () => {
-    setClueIndex((prevIndex) => prevIndex + 1);
-  };
-
   return (
     <div className="GameScreen">
       <h1>Number Guessing Game</h1>
-      <div>
-        <h2>Clues</h2>
-        {clueIndex < clues.length && (
-          <Clue clues={clues.slice(0, clueIndex + 1)} />
-        )}
-      </div>
+      <h2>Clues</h2>
+      <ClueDisplay clues={clues.slice(0, currentGuess)} />
       <div>
         <h2>Guess the Numbers</h2>
         {guess.map((guess, index) => (
-          <GuessRow active={currentGuess === index + 1} />
+          <GuessRow
+            key={index}
+            guessed={index + 1 < currentGuess}
+            active={currentGuess === index + 1}
+            index={index}
+          />
         ))}
-        <button onClick={checkGuess}>Check Guess</button>
+
+        <button
+          className={`check-guess ${
+            guess.some((input) => input === "") ? "disabled" : "active"
+          }`}
+          disabled={guess.some((input) => input === "")}
+          onClick={checkGuess}
+        >
+          Check Guess
+        </button>
       </div>
-      <GuessList guesses={guesses} answer={answer} />
     </div>
   );
 };

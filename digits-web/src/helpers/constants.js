@@ -35,6 +35,8 @@ export const NUMBERS_DIFFERENCE = "is same difference numbers";
 export const IS_NUMBER_PERFECT_SQUARE = "is number perfect square";
 export const IS_DIGIT_PERFECT_SQUARE = "is digit perfect square";
 export const DO_NUMBERS_SUM_TO_NUMBER = "do numbers sum";
+export const DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER =
+  "do all numbers sum to some number";
 export const DO_DIGITS_SUM_TO_DIGIT = "do digits sum to digit";
 export const DO_DIGITS_SUM_TO_NUMBER = "do digits sum to number";
 export const IS_DIGIT_SQUAREROOT_OF_NUMBER = "is digit squareroot of number";
