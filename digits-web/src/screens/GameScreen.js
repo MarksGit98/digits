@@ -212,6 +212,21 @@ const GameScreen = () => {
     return puzzles[puzzleIndex].clues;
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const keyCode = event.keyCode || event.which;
+      const isEnterKey = keyCode === 13;
+      if (isEnterKey && guess.every((input) => input !== "")) {
+        checkGuess();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [guess]);
+
   return (
     <div className="GameScreen">
       <h1>Number Guessing Game</h1>
