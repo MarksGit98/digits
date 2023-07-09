@@ -17,47 +17,34 @@ h2 {
 
 .input-container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   margin-bottom: 20px;
 }
 
+.number {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .input-box {
   margin: 0 5px;
-}
-
-.input-box:nth-child(1) {
-  border: 8px solid blue;
   border-radius: 20%;
 }
 
-.input-box:nth-child(2) {
-  border: 8px solid red;
-  border-radius: 20%;
-}
+.input-box .disabled {
+    border: 5px solid gray;
+  }
 
-.input-box:nth-child(4) {
-  border: 8px solid yellow;
-  border-radius: 20%;
-}
-
-.input-box:nth-child(5) {
-  border: 8px solid green;
-  border-radius: 20%;
-}
-
-.input-box:nth-child(7) {
-  border: 8px solid indigo;
-  border-radius: 20%;
-}
-
-.input-box:nth-child(8) {
-  border: 8px solid orange;
-  border-radius: 20%;
+.input-box .active {
+  border: 5px solid  red;
+  margin: 20px;
 }
 
 .separator {
-  width: 30px;
-  height: 4px;
+  width: 21px;
+  height: 3px;
   justify-content: center;
   margin-top: auto;
   margin-bottom: auto;
@@ -66,7 +53,7 @@ h2 {
   /* border-width: 0 0 0 20px; */
 }
 
-input[type="number"] {
+input {
   height: 40px;
   width: 40px;
   text-align: center;
@@ -74,11 +61,6 @@ input[type="number"] {
   font-size: 28px;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 
 button {
   padding: 10px 20px;

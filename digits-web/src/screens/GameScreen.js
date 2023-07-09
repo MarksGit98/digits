@@ -17,11 +17,11 @@ const NumberInput = React.forwardRef(({ value, onChange, disabled }, ref) => (
   <input
     disabled={disabled}
     ref={ref}
-    type="number"
+    type="tel" 
     value={value}
     onChange={onChange}
-    min={0}
-    max={9}
+    maxLength={1} 
+    pattern="[0-9]*"
   />
 ));
 
@@ -30,6 +30,7 @@ const GuessList = ({ guesses, answer }) => {
     const formattedGuess = guess.split("-").map(Number);
     return formattedGuess;
   };
+
 
   const getCorrectDigits = (guess) => {
     const formattedGuess = formatGuess(guess);
@@ -79,7 +80,7 @@ const GuessList = ({ guesses, answer }) => {
 };
 
 const GameScreen = () => {
-  const inputRefs = useRef([]);
+  const inputRefs = useRef([null, null, null, null, null, null]);
   const generateRandomAnswer = () => {
     const puzzleIndex = Math.floor(Math.random() * puzzles.length);
     return puzzles[puzzleIndex].puzzle;
@@ -100,34 +101,43 @@ const GameScreen = () => {
   const handleGuessChange = (index, event) => {
     const newGuess = [...guess];
     const inputValue = event.target.value;
-    console.log(index);
-    if (inputValue >= 0 && inputValue <= 9) {
+
+    if (/^[0-9]$/.test(inputValue)) {
       newGuess[index] = inputValue;
       setGuess(newGuess);
+
+      if (index < inputRefs.current.length - 1) {
+        console.log('forward', inputRefs, index)
+        inputRefs.current[index + 1].focus();
+      }
     }
 
-    if (event.nativeEvent.inputType === "deleteContentBackward" && index > 0) {
-      inputRefs.current[index - 1].focus();
-    } else if (index < inputRefs.current.length - 1) {
-      inputRefs.current[index + 1].focus();
+    else if (event.nativeEvent.inputType === "deleteContentBackward") {
+      newGuess[index] = ''
+      setGuess(newGuess)
+      if (index > 0) {
+        inputRefs.current[index - 1].focus();
+      }
     }
+
+    console.log(newGuess)
   };
 
   const Number = ({ disabled, number }) => (
     <div className="number">
-      <div className="input-box">
+      <div className={`input-box ${disabled ? 'disabled' : 'active'}`} >
         <NumberInput
           disabled={disabled}
-          ref={(el) => (inputRefs.current[number * 2 - 2] = el)}
-          value={guess[number * 2 - 1]}
+          ref={!disabled ? (el) => (inputRefs.current[number * 2 - 2] = el): null}
+          value={!disabled ? guess[number * 2 - 2] : null}
           onChange={(e) => handleGuessChange(number * 2 - 2, e)}
         />
       </div>
       <div className="input-box">
         <NumberInput
           disabled={disabled}
-          ref={(el) => (inputRefs.current[number * 2 - 1] = el)}
-          value={guess[number * 2 - 2]}
+          ref={!disabled ? (el) => (inputRefs.current[number * 2 - 1] = el): null}
+          value={!disabled ? guess[number * 2 - 1] : null}
           onChange={(e) => handleGuessChange(number * 2 - 1, e)}
         />
       </div>
