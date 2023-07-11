@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, forwardRef, useMemo } from "react";
 import { puzzles } from "../puzzles/puzzles";
+import { HelpGuide } from "./HelpGuide";
+import { GameConcluded } from "./GameConcluded";
 import "./GameScreen.scss";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { MAX_GUESS_AMOUNT } from "../helpers/constants";
 
 const NumberInput = forwardRef(
@@ -25,13 +28,15 @@ const GameScreen = () => {
     const puzzleIndex = Math.floor(Math.random() * puzzles.length);
     return puzzles[puzzleIndex].puzzle;
   };
-
+  const [openHelpGuide, setOpenHelpGuide] = useState(false);
   const [currentInput, setCurrentInput] = useState(0);
-  const [currentGuess, setCurrentGuess] = useState(1);
+  const [currentGuess, setCurrentGuess] = useState(0);
   const [guess, setGuess] = useState(["", "", "", "", "", ""]);
   const [clues, setClues] = useState([]);
   const [answer, setAnswer] = useState(generateRandomAnswer());
+  const [answerFound, setAnswerFound] = useState(false);
   const [guesses, setGuesses] = useState([]);
+  const [openEndScreen, setOpenEndScreen] = useState(false);
 
   useEffect(() => {
     setClues(generateClues(answer));
@@ -57,8 +62,13 @@ const GameScreen = () => {
   }, []);
 
   useEffect(() => {
-    if (inputRefs.current.length) inputRefs.current[currentInput].focus();
-  }, [inputRefs, currentInput, guess]);
+    if (
+      inputRefs.current.length &&
+      currentGuess !== MAX_GUESS_AMOUNT &&
+      !answerFound
+    )
+      inputRefs.current[currentInput].focus();
+  }, [inputRefs, currentInput, guess, currentGuess]);
 
   const ClueDisplay = ({ clues }) => (
     <div className="clue-display">
@@ -68,7 +78,7 @@ const GameScreen = () => {
           <div className={"clue"} key={index}>
             <div className={"clue-number"}>{index + 1}.</div>
             <div className={"clue-text"}>
-              {index < currentGuess ? `${clues[index]}` : ""}
+              {index < currentGuess + 1 ? `${clues[index]}` : ""}
             </div>
           </div>
         ))}
@@ -87,7 +97,6 @@ const GameScreen = () => {
         setCurrentInput(index + 1);
       }
     }
-    console.log(newGuess);
   };
 
   const handleBackspace = (index, event) => {
@@ -98,8 +107,6 @@ const GameScreen = () => {
       }
       newGuess[index] = "";
       setGuess(newGuess);
-
-      console.log(newGuess);
     }
   };
 
@@ -194,17 +201,36 @@ const GameScreen = () => {
     </div>
   );
 
+  const handleQuestionClick = () => {
+    setOpenHelpGuide((current) => !current);
+  };
+
+  const handleEndScreenClick = () => {
+    setOpenEndScreen((current) => !current);
+  };
+
+  const Header = () => (
+    <div className="header">
+      <h1>Number Guessing Game</h1>
+      <button className="question-button" onClick={handleQuestionClick}>
+        <i className="fas fa-question-circle"></i>
+      </button>
+    </div>
+  );
+
   const checkGuess = () => {
     const isCorrect = guess.every((value, index) => value === answer[index]);
     if (isCorrect) {
-      alert("Congratulations! You guessed the correct answer!");
       setAnswer(generateRandomAnswer());
-    } else {
-      setGuesses([...guesses, guess]);
+      setAnswerFound(true);
+      setOpenEndScreen(true);
+    } else if (currentGuess + 1 === MAX_GUESS_AMOUNT) {
+      setOpenEndScreen(true);
     }
+    setGuesses([...guesses, guess]);
     setGuess(["", "", "", "", "", ""]);
-    setCurrentGuess((currentGuess) => currentGuess + 1);
     setCurrentInput(0);
+    setCurrentGuess((currentGuess) => currentGuess + 1);
   };
 
   const generateClues = (answer) => {
@@ -229,16 +255,17 @@ const GameScreen = () => {
 
   return (
     <div className="GameScreen">
-      <h1>Number Guessing Game</h1>
+      <Header />
+      <HelpGuide open={openHelpGuide} handleClick={handleQuestionClick} />
       <h2>Clues</h2>
-      <ClueDisplay clues={clues.slice(0, currentGuess)} />
+      <ClueDisplay clues={clues.slice(0, currentGuess + 1)} />
       <div>
         <h2>Guess the Numbers</h2>
         {guess.map((guess, index) => (
           <GuessRow
             key={index}
-            guessed={index + 1 < currentGuess}
-            active={currentGuess === index + 1}
+            guessed={index < currentGuess || currentGuess === MAX_GUESS_AMOUNT}
+            active={currentGuess === index && !answerFound}
             index={index}
           />
         ))}
@@ -252,6 +279,12 @@ const GameScreen = () => {
         >
           Check Guess
         </button>
+        <GameConcluded
+          open={openEndScreen}
+          handleClick={handleEndScreenClick}
+          won={answerFound}
+          attempts={currentGuess}
+        />
       </div>
     </div>
   );
