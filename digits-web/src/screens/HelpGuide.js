@@ -7,11 +7,11 @@ export const HelpGuide = ({ open, handleClick }) => {
   ];
 
   return (
-    <div className={`help-guide ${open ? "open" : "close"}`}>
-      <div className="help-content">
+    <div className={`menu-screen ${open ? "open" : "close"}`}>
+      <div className="menu-content">
         <h2>How To Play</h2>
         <h3>Correctly guess all 6 digits to compose the 3 numbers</h3>
-        <ul className="help-content-rules">
+        <ul className="menu-content-rules">
           {rules.map((rule, index) => (
             <li key={index}>{rule}</li>
           ))}

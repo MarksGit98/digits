@@ -284,6 +284,7 @@ const GameScreen = () => {
           handleClick={handleEndScreenClick}
           won={answerFound}
           attempts={currentGuess}
+          answer={answer}
         />
       </div>
     </div>

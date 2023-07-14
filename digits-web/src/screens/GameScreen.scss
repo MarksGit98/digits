@@ -6,7 +6,7 @@
 }
 
 .GameScreen {
-  font-family: "Press Start 2P", sans-serif;
+  // font-family: "Press Start 2P", sans-serif;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
@@ -37,7 +37,7 @@ h1 {
   margin-bottom: 10px; /* Add this line */
 }
 
-.help-guide {
+.menu-screen {
   position: fixed;
   top: 0;
   left: 0;
@@ -57,7 +57,7 @@ h1 {
     opacity: 1;
   }
 
-  .help-content {
+  .menu-content {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
@@ -67,7 +67,7 @@ h1 {
     width: 90%; /* Adjust the value based on your preference */
     text-align: left;
 
-    .help-content-rules {
+    .menu-content-rules {
       font-family: "nyt-franklin";
       font-size: 16px;
       line-height: 20px;
@@ -155,7 +155,6 @@ h1 {
   margin-bottom: auto;
   background-color: black;
   border-bottom: 3px solid black;
-  /* border-width: 0 0 0 20px; */
 }
 
 input {
@@ -224,4 +223,31 @@ input {
     font-size: 20px;
     line-height: 26px;
   }
+}
+
+.number-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid black;
+  background-color: #fff;
+  font-size: 17px;
+  font-family: "Press Start 2P", sans-serif;
+  background-color: orange;
+  color: #fff;
+  margin-left: 2px;
+}
+
+.example-separator {
+  width: 14px;
+  height: 2px;
+  justify-content: center;
+  margin-left: 3px;
+  margin-right: 1px;
+  margin-top: auto;
+  margin-bottom: auto;
+  background-color: black;
+  border-bottom: 3px solid black;
 }
