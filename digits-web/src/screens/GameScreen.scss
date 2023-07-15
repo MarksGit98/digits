@@ -17,7 +17,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid lightgray;
   padding: 20px;
 }
 
@@ -235,9 +235,17 @@ input {
   background-color: #fff;
   font-size: 17px;
   font-family: "Press Start 2P", sans-serif;
+  margin-left: 2px;
+}
+
+.correct-digit {
   background-color: orange;
   color: #fff;
-  margin-left: 2px;
+}
+
+.incorrect-digit {
+  background-color: lightgray;
+  color: #000;
 }
 
 .example-separator {
@@ -250,4 +258,10 @@ input {
   margin-bottom: auto;
   background-color: black;
   border-bottom: 3px solid black;
+}
+
+.new-puzzle-info {
+  margin-bottom: 20px;
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
 }
