@@ -1,5 +1,5 @@
 export const ExampleRow = ({ example, answer }) => (
-  <div className="input-container">
+  <div className="example-input-container">
     <Number number={1} answer={answer} example={example} />
     <div className="example-separator" />
     <Number number={2} answer={answer} example={example} />
@@ -24,8 +24,8 @@ const Number = ({ number, example, answer }) => {
   const isCorrectDigit2 = example[secondIndex] === answer[secondIndex];
   return (
     <div className="number">
-      <NumberBox value={answer[firstIndex]} correct={isCorrectDigit1} />
-      <NumberBox value={answer[secondIndex]} correct={isCorrectDigit2} />
+      <NumberBox value={example[firstIndex]} correct={isCorrectDigit1} />
+      <NumberBox value={example[secondIndex]} correct={isCorrectDigit2} />
     </div>
   );
 };

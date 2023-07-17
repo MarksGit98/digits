@@ -28,18 +28,21 @@ const GameScreen = () => {
     const puzzleIndex = Math.floor(Math.random() * puzzles.length);
     return puzzles[puzzleIndex].puzzle;
   };
+  const generateClues = (answer) => {
+    const puzzleIndex = Math.floor(Math.random() * puzzles.length);
+    return puzzles[puzzleIndex].clues;
+  };
+
   const [openHelpGuide, setOpenHelpGuide] = useState(false);
   const [currentInput, setCurrentInput] = useState(0);
   const [currentGuess, setCurrentGuess] = useState(0);
   const [guess, setGuess] = useState(["", "", "", "", "", ""]);
-  const [clues, setClues] = useState([]);
   const [answer, setAnswer] = useState(generateRandomAnswer());
   const [answerFound, setAnswerFound] = useState(false);
   const [guesses, setGuesses] = useState([]);
   const [openEndScreen, setOpenEndScreen] = useState(false);
-
-  useEffect(() => {
-    setClues(generateClues(answer));
+  const clues = useMemo(() => {
+    return generateClues(answer);
   }, [answer]);
 
   useEffect(() => {
@@ -75,15 +78,46 @@ const GameScreen = () => {
       {Array(MAX_GUESS_AMOUNT)
         .fill("-")
         .map((_, index) => (
-          <div className={"clue"} key={index}>
-            <div className={"clue-number"}>{index + 1}.</div>
-            <div className={"clue-text"}>
+          <div
+            className={`clue ${
+              index < currentGuess + 1 ? "visible" : "disabled"
+            }`}
+            key={index}
+          >
+            <h3 className="clue-number">{index + 1}</h3>
+            <div
+              className={`clue-text ${
+                index < currentGuess + 1 ? "animated " : ""
+              } ${clues[index]?.length > 12 ? "multi-line" : ""}`}
+            >
               {index < currentGuess + 1 ? `${clues[index]}` : ""}
             </div>
           </div>
         ))}
     </div>
   );
+
+  useEffect(() => {
+    const clueElements = document.querySelectorAll(".clue-text");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animated");
+        }
+      });
+    });
+
+    clueElements.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => {
+      clueElements.forEach((element) => {
+        observer.unobserve(element);
+      });
+    };
+  }, []);
 
   const handleGuessChange = (index, event) => {
     const newGuess = [...guess];
@@ -211,7 +245,7 @@ const GameScreen = () => {
 
   const Header = () => (
     <div className="header">
-      <h1>Number Guessing Game</h1>
+      <h1>Digitle</h1>
       <button className="question-button" onClick={handleQuestionClick}>
         <i className="fas fa-question-circle"></i>
       </button>
@@ -231,11 +265,6 @@ const GameScreen = () => {
     setGuess(["", "", "", "", "", ""]);
     setCurrentInput(0);
     setCurrentGuess((currentGuess) => currentGuess + 1);
-  };
-
-  const generateClues = (answer) => {
-    const puzzleIndex = Math.floor(Math.random() * puzzles.length);
-    return puzzles[puzzleIndex].clues;
   };
 
   useEffect(() => {
