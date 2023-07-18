@@ -21,14 +21,14 @@ export const HelpGuide = ({ open, handleClick }) => {
   return (
     <div className={`menu-screen ${open ? "open" : "close"}`}>
       <div className="menu-content">
-        <h2 className={"center-text"}>How To Play</h2>
+        <h2 className={"center-text underline"}>How To Play</h2>
         <h3>Correctly guess all 6 digits to compose the 3 numbers</h3>
         <ul className="menu-content-rules">
           {rules.map((rule, index) => (
             <li key={index}>{rule}</li>
           ))}
         </ul>
-        <h3 className="center-text ">Example Game</h3>
+        <h3 className="center-text underline">Example Game</h3>
         <p className="center-text">
           Clue 1: The 2nd number is a perfect square
         </p>

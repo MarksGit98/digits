@@ -286,10 +286,8 @@ const GameScreen = () => {
     <div className="GameScreen">
       <Header />
       <HelpGuide open={openHelpGuide} handleClick={handleQuestionClick} />
-      <h2>Clues</h2>
       <ClueDisplay clues={clues.slice(0, currentGuess + 1)} />
-      <div>
-        <h2>Guess the Numbers</h2>
+      <div className="guess-block">
         {guess.map((guess, index) => (
           <GuessRow
             key={index}

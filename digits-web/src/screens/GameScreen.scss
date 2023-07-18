@@ -101,6 +101,13 @@ h3 {
       font-weight: 400;
     }
 
+    h4 {
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      margin-top: 12px;
+    }
+
     .close-button {
       position: absolute;
       top: 5px;
@@ -123,7 +130,7 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 21px;
 }
 
 .example-input-container {
@@ -156,6 +163,18 @@ h3 {
     }
   }
 
+  input {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+    font-size: 28px;
+    font-family: "Press Start 2P", sans-serif;
+
+    &.correct-guess {
+      color: #fff;
+    }
+  }
   &.active {
     border: 3px solid orange;
   }
@@ -171,27 +190,17 @@ h3 {
   border-bottom: 3px solid black;
 }
 
-input {
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  padding: 5px;
-  font-size: 28px;
-  font-family: "Press Start 2P", sans-serif;
-  :disabled {
-    border: 10px solid red;
-  }
-}
-
 .check-guess {
+  margin-top: 8px;
   padding: 10px 20px;
   font-size: 24px;
   border-radius: 5px;
+
   &.active {
     background-color: #333;
     color: #fff;
-    border: none;
     cursor: pointer;
+    border: none;
   }
 
   &.disabled {
@@ -203,6 +212,7 @@ input {
 }
 
 .clue-display {
+  margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
   width: 660px;
@@ -218,8 +228,6 @@ input {
     color: #000;
     overflow: hidden;
     white-space: nowrap;
-    display: flex;
-    flex-direction: row;
     align-items: center;
 
     &.disabled {
@@ -229,11 +237,11 @@ input {
       text-align: center;
 
       .clue-number {
-        display: flex;
-
         font-size: 36px;
-        width: 100%;
-        height: fit-content;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
       }
     }
 
@@ -248,15 +256,13 @@ input {
     }
 
     .clue-number {
-      font-size: 32px;
+      font-size: 36px;
       width: 100%;
       height: fit-content;
     }
 
     .clue-text {
-      font-size: 20px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 18px;
       flex-grow: 1;
       white-space: normal;
       margin-left: 5px;
@@ -264,6 +270,9 @@ input {
   }
 }
 
+.guess-block {
+  margin-top: 30px;
+}
 .number-box {
   display: flex;
   justify-content: center;
@@ -275,16 +284,16 @@ input {
   font-size: 17px;
   font-family: "Press Start 2P", sans-serif;
   margin-left: 2px;
-}
 
-.correct-digit {
-  background-color: orange;
-  color: #fff;
-}
+  &.correct-digit {
+    background-color: orange;
+    color: #fff;
+  }
 
-.incorrect-digit {
-  background-color: lightgray;
-  color: #000;
+  &.incorrect-digit {
+    background-color: lightgray;
+    color: #000;
+  }
 }
 
 .example-separator {
@@ -306,6 +315,11 @@ input {
   font-size: 14px;
   text-align: center;
   color: gray;
+}
+
+.underline {
+  padding-bottom: 6px;
+  border-bottom: 1px solid lightgray;
 }
 
 .center-text {
