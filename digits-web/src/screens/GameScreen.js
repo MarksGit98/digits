@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, forwardRef, useMemo } from "react";
+import { getAllApplicableClues } from "../helpers/clues";
 import { puzzles } from "../puzzles/puzzles";
 import { HelpGuide } from "./HelpGuide";
 import { GameConcluded } from "./GameConcluded";
@@ -23,7 +24,7 @@ const NumberInput = forwardRef(
 
 const GameScreen = () => {
   const inputRefs = useRef([]);
-
+  console.log(getAllApplicableClues([1, 2, 3, 4, 5, 6]));
   const generateRandomAnswer = () => {
     const puzzleIndex = Math.floor(Math.random() * puzzles.length);
     return puzzles[puzzleIndex].puzzle;

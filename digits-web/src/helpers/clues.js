@@ -928,144 +928,160 @@ export const getAllApplicableClues = (answer) => {
       clue: `All three numbers sum to 25`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 25),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        25
+      ),
     },
     {
       clue: `All three numbers sum to 30`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 30),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        30
+      ),
     },
     {
       clue: `All three numbers sum to 40`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 40),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        40
+      ),
     },
     {
       clue: `All three numbers sum to 50`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 50),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        50
+      ),
     },
     {
       clue: `All three numbers sum to 60`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 60),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        60
+      ),
     },
     {
       clue: `All three numbers sum to 70`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 70),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        70
+      ),
     },
     {
       clue: `All three numbers sum to 75`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 75),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        75
+      ),
     },
     {
       clue: `All three numbers sum to 80`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 80),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        80
+      ),
     },
     {
       clue: `All three numbers sum to 90`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 90),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        90
+      ),
     },
     {
       clue: `All three numbers sum to 100`,
       used: false,
       type: DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
-      evaluation: checkIfNumbersSum(number1, number2, number3, 100),
+      evaluation: checkIfAllNumbersSumToSomeNumber(
+        number1,
+        number2,
+        number3,
+        100
+      ),
     },
   ];
-
-  for (let clue_ind = 0; clue_ind < clues.length; clue_ind++) {
-    let digits_array = [...digits];
-    let clue_type = clues[clue_ind].type;
-    let clue_text = clues[clue_ind].clue;
-    if (NUMBER_DIGIT_REQS[clue_type] === DIGIT) {
-      if (clue_text.includes(DIGIT_SIX)) {
-        for (
-          let digit1_ind = 0;
-          digit1_ind < digits_array.length;
-          digit1_ind++
-        ) {
-          let digit1 = digits_array[digit1_ind].digit;
-          let remaining_digits1 = digits_array
-            .slice(0, digit1_ind)
-            .concat(digits_array.slice(digit1_ind + 1));
-          for (
-            let digit2_ind = 0;
-            digit2_ind < remaining_digits1.length;
-            digit2_ind++
-          ) {
-            let digit2 = remaining_digits1[digit2_ind].digit;
-            let remaining_digits2 = remaining_digits1
-              .slice(0, digit2_ind)
-              .concat(remaining_digits1.slice(digit2_ind + 1));
-
-            for (
-              let digit3_ind = 0;
-              digit3_ind < remaining_digits2.length;
-              digit3_ind++
-            ) {
-              let digit3 = remaining_digits2[digit3_ind].digit;
-              let remaining_digits3 = remaining_digits2
-                .slice(0, digit3_ind)
-                .concat(remaining_digits2.slice(digit3_ind + 1));
-
-              for (
-                let digit4_ind = 0;
-                digit4_ind < remaining_digits3.length;
-                digit4_ind++
-              ) {
-                let digit4 = remaining_digits3[digit4_ind].digit;
-                let remaining_digits4 = remaining_digits3
-                  .slice(0, digit4_ind)
-                  .concat(remaining_digits3.slice(digit4_ind + 1));
-
-                for (
-                  let digit5_ind = 0;
-                  digit5_ind < remaining_digits4.length;
-                  digit5_ind++
-                ) {
-                  let digit5 = remaining_digits4[digit5_ind].digit;
-                  let remaining_digits5 = remaining_digits4
-                    .slice(0, digit5_ind)
-                    .concat(remaining_digits4.slice(digit5_ind + 1));
-
-                  for (
-                    let digit6_ind = 0;
-                    digit6_ind < remaining_digits5.length;
-                    digit6_ind++
-                  ) {
-                    let digit6 = remaining_digits5[digit6_ind].digit;
-
-                    if (clues[clue_ind].evaluation()) {
-                      possibleClues.push({
-                        clue: clues[clue_ind],
-                        digits: {
+  console.log(numbers);
+  let remaining_digits = [...digits];
+  let remaining_numbers = [...numbers];
+  console.log(remaining_numbers);
+  for (let num1 of remaining_numbers) {
+    number1 = num1.number;
+    remaining_numbers = remaining_numbers.slice(1);
+    console.log(remaining_numbers);
+    for (let num2 of remaining_numbers) {
+      number2 = num2.number;
+      remaining_numbers = remaining_numbers.slice(1);
+      for (let num3 of remaining_numbers) {
+        number3 = num3.number;
+        for (let dig1 of remaining_digits) {
+          digit1 = dig1.digit;
+          remaining_digits = remaining_digits.slice(1);
+          for (let dig2 of remaining_digits) {
+            digit2 = dig2.digit;
+            remaining_digits = remaining_digits.slice(1);
+            for (let dig3 of remaining_digits) {
+              digit3 = dig3.digit;
+              remaining_digits = remaining_digits.slice(1);
+              for (let dig4 of remaining_digits) {
+                digit4 = dig4.digit;
+                remaining_digits = remaining_digits.slice(1);
+                for (let dig5 of remaining_digits) {
+                  digit5 = dig5.digit;
+                  remaining_digits = remaining_digits.slice(1);
+                  for (let dig6 of remaining_digits) {
+                    digit6 = dig6.digit;
+                    for (let clue of clues) {
+                      if (clue.evaluation) {
+                        possibleClues.push({
+                          clueObj: clue,
                           digit1: digit1,
                           digit2: digit2,
                           digit3: digit3,
                           digit4: digit4,
                           digit5: digit5,
                           digit6: digit6,
-                        },
-                        numbers: {
                           number1: number1,
                           number2: number2,
                           number3: number3,
-                        },
-                        puzzle: answer,
-                      });
+                        });
+                      }
+                      remaining_digits = [...digits];
+                      remaining_numbers = [...numbers];
                     }
                   }
                 }
@@ -1073,13 +1089,8 @@ export const getAllApplicableClues = (answer) => {
             }
           }
         }
-      } else if (clue_text.includes(DIGIT_FIVE)) {
-        //finish code
       }
-    } else if (NUMBER_DIGIT_REQS[clue_type] === NUMBER) {
-    } else if (NUMBER_DIGIT_REQS[clue_type] === DIGIT_AND_NUMBER) {
     }
   }
-
   return possibleClues;
 };
