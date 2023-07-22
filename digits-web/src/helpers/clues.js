@@ -72,81 +72,46 @@ import {
   NUMBER,
   DIGIT_AND_NUMBER,
   DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
+  MAX_GUESS_AMOUNT,
+  CLUE_CATEGORY_GROUPS,
+  MISCELLANEOUS,
 } from "./constants";
+
 const numberToTextConversion = (number) => {
   let formattedNumber;
-  if (number < 10) {
-    formattedNumber = `0${number}`;
-  } else {
-    formattedNumber = number.toString();
-  }
-  if (formattedNumber[1] === "1") {
+  formattedNumber = number.toString();
+
+  if (formattedNumber === "1") {
     return `${formattedNumber}st`;
-  } else if (formattedNumber[1] === "2") {
+  } else if (formattedNumber === "2") {
     return `${formattedNumber}nd`;
-  } else if (formattedNumber[1] === "3") {
+  } else if (formattedNumber === "3") {
     return `${formattedNumber}rd`;
   } else {
     return `${formattedNumber}th`;
   }
 };
 
-const randomizeClues = (clues) => {
-  const shuffledClues = [...clues]; // Create a copy of the original array
-
-  // Perform Fisher-Yates shuffle
-  for (let i = shuffledClues.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledClues[i], shuffledClues[j]] = [shuffledClues[j], shuffledClues[i]];
-  }
-
-  return shuffledClues;
-};
-//Digit as passed in to numberToTextConversion refers to the place of the digit whereas when passed
-//Into the evaluation function refers to the actual number. Need to correct this somehow
-//Also categorize all of the clues and only allow 1 clue from each category in
-//Before selecting clues to make sure they all get a chance, randomize them before running a loop of all possible permutations through
-//Also accumulate all clues for all possible permutations first and randomize those before choosing which final one of each category to go with
-//Additionally add weights in the selection process
-//Check for division by 0 error
-//Save the clues and just use an existing JSON for puzzles on live to avoid run time issueZ
-
-export const getAllApplicableClues = (answer) => {
-  const possibleClues = [];
-  let DIGIT_ONE = "DIGIT #1";
-  let DIGIT_TWO = "DIGIT #2";
-  let DIGIT_THREE = "DIGIT #3";
-  let DIGIT_FOUR = "DIGIT #4";
-  let DIGIT_FIVE = "DIGIT #5";
-  let DIGIT_SIX = "DIGIT #6";
-
-  let NUMBER_ONE = "NUMBER #1";
-  let NUMBER_TWO = "NUMBER #2";
-  let NUMBER_THREE = "NUMBER #3";
-
-  let digit1 = answer[0];
-  let digit2 = answer[1];
-  let digit3 = answer[2];
-  let digit4 = answer[3];
-  let digit5 = answer[4];
-  let digit6 = answer[5];
-  let number1 = parseInt(`${digit1}${digit2}`);
-  let number2 = parseInt(`${digit3}${digit4}`);
-  let number3 = parseInt(`${digit5}${digit6}`);
-  let digits = [
-    { digit: digit1, index: 0 },
-    { digit: digit2, index: 1 },
-    { digit: digit3, index: 2 },
-    { digit: digit4, index: 3 },
-    { digit: digit5, index: 4 },
-    { digit: digit6, index: 5 },
-  ];
-  let numbers = [
-    { number: number1, index: 0 },
-    { number: number2, index: 1 },
-    { number: number3, index: 2 },
-  ];
-
+const generateClues = (
+  DIGIT_ONE = 1,
+  DIGIT_TWO = 2,
+  DIGIT_THREE = 3,
+  DIGIT_FOUR = 4,
+  DIGIT_FIVE = 5,
+  DIGIT_SIX = 6,
+  NUMBER_ONE = 1,
+  NUMBER_TWO = 2,
+  NUMBER_THREE = 3,
+  digit1 = 0,
+  digit2 = 0,
+  digit3 = 0,
+  digit4 = 0,
+  digit5 = 0,
+  digit6 = 0,
+  number1 = 0,
+  number2 = 0,
+  number3 = 0
+) => {
   const clues = [
     {
       clue: `The ${numberToTextConversion(DIGIT_ONE)} digit is an even number`,
@@ -1035,36 +1000,130 @@ export const getAllApplicableClues = (answer) => {
       ),
     },
   ];
-  console.log(numbers);
+
+  return clues;
+};
+//Digit as passed in to numberToTextConversion refers to the place of the digit whereas when passed
+//Into the evaluation function refers to the actual number. Need to correct this somehow
+//Also categorize all of the clues and only allow 1 clue from each category in
+//Before selecting clues to make sure they all get a chance, randomize them before running a loop of all possible permutations through
+//Also accumulate all clues for all possible permutations first and randomize those before choosing which final one of each category to go with
+//Additionally add weights in the selection process
+//Check for division by 0 error
+//Save the clues and just use an existing JSON for puzzles on live to avoid run time issueZ
+
+export const getAllApplicableClues = (answer) => {
+  const possibleClues = [];
+  let DIGIT_ONE = 1;
+  let DIGIT_TWO = 2;
+  let DIGIT_THREE = 3;
+  let DIGIT_FOUR = 4;
+  let DIGIT_FIVE = 5;
+  let DIGIT_SIX = 6;
+  let NUMBER_ONE = 1;
+  let NUMBER_TWO = 2;
+  let NUMBER_THREE = 3;
+  let digit1 = answer[0];
+  let digit2 = answer[1];
+  let digit3 = answer[2];
+  let digit4 = answer[3];
+  let digit5 = answer[4];
+  let digit6 = answer[5];
+  let number1 = parseInt(`${digit1}${digit2}`);
+  let number2 = parseInt(`${digit3}${digit4}`);
+  let number3 = parseInt(`${digit5}${digit6}`);
+  let digits = [
+    { digit: digit1, index: 1 },
+    { digit: digit2, index: 2 },
+    { digit: digit3, index: 3 },
+    { digit: digit4, index: 4 },
+    { digit: digit5, index: 5 },
+    { digit: digit6, index: 6 },
+  ];
+  let numbers = [
+    { number: number1, index: 1 },
+    { number: number2, index: 2 },
+    { number: number3, index: 3 },
+  ];
+
   let remaining_digits = [...digits];
   let remaining_numbers = [...numbers];
-  console.log(remaining_numbers);
   for (let num1 of remaining_numbers) {
     number1 = num1.number;
-    remaining_numbers = remaining_numbers.slice(1);
-    console.log(remaining_numbers);
-    for (let num2 of remaining_numbers) {
+    NUMBER_ONE = num1.index;
+    let remaining_numbers_1 = remaining_numbers.slice();
+    remaining_numbers_1.splice(NUMBER_ONE - 1, 1);
+    for (let num2 of remaining_numbers_1) {
       number2 = num2.number;
-      remaining_numbers = remaining_numbers.slice(1);
-      for (let num3 of remaining_numbers) {
+      NUMBER_TWO = num2.index;
+      let remaining_numbers_2 = remaining_numbers_1.slice();
+      remaining_numbers_2.splice(NUMBER_TWO - 1, 1);
+      for (let num3 of remaining_numbers_2) {
         number3 = num3.number;
+        NUMBER_THREE = num3.index;
         for (let dig1 of remaining_digits) {
           digit1 = dig1.digit;
-          remaining_digits = remaining_digits.slice(1);
-          for (let dig2 of remaining_digits) {
+          DIGIT_ONE = dig1.index;
+          let remaining_digits_1 = remaining_digits.slice();
+          remaining_digits_1.splice(DIGIT_ONE - 1, 1);
+          for (let dig2 of remaining_digits_1) {
             digit2 = dig2.digit;
-            remaining_digits = remaining_digits.slice(1);
-            for (let dig3 of remaining_digits) {
+            DIGIT_TWO = dig2.index;
+            let remaining_digits_2 = remaining_digits_1.slice();
+            remaining_digits_2.splice(DIGIT_ONE - 1, 1);
+            for (let dig3 of remaining_digits_2) {
               digit3 = dig3.digit;
-              remaining_digits = remaining_digits.slice(1);
-              for (let dig4 of remaining_digits) {
+              DIGIT_THREE = dig3.index;
+              let remaining_digits_3 = remaining_digits_2.slice();
+              remaining_digits_3.splice(DIGIT_TWO - 1, 1);
+              for (let dig4 of remaining_digits_3) {
                 digit4 = dig4.digit;
-                remaining_digits = remaining_digits.slice(1);
-                for (let dig5 of remaining_digits) {
+                DIGIT_FOUR = dig4.index;
+                let remaining_digits_4 = remaining_digits_3.slice();
+                remaining_digits_4.splice(DIGIT_THREE - 1, 1);
+                for (let dig5 of remaining_digits_4) {
                   digit5 = dig5.digit;
-                  remaining_digits = remaining_digits.slice(1);
-                  for (let dig6 of remaining_digits) {
+                  DIGIT_FIVE = dig5.index;
+                  let remaining_digits_5 = remaining_digits_4.slice();
+                  remaining_digits_5.splice(DIGIT_FOUR - 1, 1);
+                  for (let dig6 of remaining_digits_5) {
                     digit6 = dig6.digit;
+                    DIGIT_SIX = dig6.index;
+
+                    console.log(
+                      "dig1",
+                      digit1,
+                      "dig2",
+                      digit2,
+                      "dig3",
+                      digit3,
+                      "dig4",
+                      digit4,
+                      "dig5",
+                      digit5,
+                      "dig6",
+                      digit6
+                    );
+                    let clues = generateClues(
+                      DIGIT_ONE,
+                      DIGIT_TWO,
+                      DIGIT_THREE,
+                      DIGIT_FOUR,
+                      DIGIT_FIVE,
+                      DIGIT_SIX,
+                      NUMBER_ONE,
+                      NUMBER_TWO,
+                      NUMBER_THREE,
+                      digit1,
+                      digit2,
+                      digit3,
+                      digit4,
+                      digit5,
+                      digit6,
+                      number1,
+                      number2,
+                      number3
+                    );
                     for (let clue of clues) {
                       if (clue.evaluation) {
                         possibleClues.push({
@@ -1093,4 +1152,43 @@ export const getAllApplicableClues = (answer) => {
     }
   }
   return possibleClues;
+};
+
+const shuffleClues = (possibleClues) => {
+  for (let i = possibleClues.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [possibleClues[i], possibleClues[j]] = [possibleClues[j], possibleClues[i]];
+  }
+};
+
+export const selectRandomClues = (
+  possibleClues,
+  numOfClues = MAX_GUESS_AMOUNT
+) => {
+  const selectedClues = [];
+  const selectedTypes = [];
+  const selectedGroupTypes = { ...CLUE_CATEGORY_GROUPS };
+
+  shuffleClues(possibleClues);
+
+  for (const clue of possibleClues) {
+    const clueType = clue.clueObj.type;
+    console.log(clueType);
+    console.log(selectedGroupTypes[clueType.group]);
+    if (
+      !selectedTypes.includes(clueType.description) &&
+      clueType.group !== MISCELLANEOUS
+        ? selectedGroupTypes[clueType.group].count < 2
+        : true
+    ) {
+      selectedClues.push(clue.clueObj.clue);
+      selectedTypes.push(clueType.description);
+      selectedGroupTypes[clueType.group].count += 1;
+      if (selectedClues.length === numOfClues) {
+        break;
+      }
+    }
+  }
+
+  return selectedClues;
 };

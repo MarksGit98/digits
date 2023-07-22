@@ -4,63 +4,216 @@ export const DIGIT = "digit";
 export const NUMBER = "number";
 export const DIGIT_AND_NUMBER = "digit and number";
 
-export const IS_ODD_DIGIT = "is odd digit";
-export const IS_EVEN_DIGIT = "is even digit";
-export const IS_PRIME_NUMBER = "is prime number";
-export const IS_PRIME_DIGIT = "is prime digit";
-export const IS_DIGIT_DIVISIBLE_BY_THREE = "is digit divisible by 3";
-export const IS_DIGIT_DIVISIBLE_BY_FOUR = "is digit divisble by 4";
-export const IS_DIGIT_DIVISIBLE_BY_FIVE = "is digit divisble by 5";
-export const IS_DIGIT_DIVISIBLE_BY_SIX = "is digit divisble by 6";
-export const IS_DIGIT_DIVISIBLE_BY_SEVEN = "is digit divisble by 7";
-export const IS_DIGIT_DIVISIBLE_BY_EIGHT = "is digit divisble by 8";
-export const IS_DIGIT_DIVISIBLE_BY_NINE = "is digit divisble by 9";
-export const IS_NUMBER_DIVISIBLE_BY_THREE = "is number divisible by 3";
-export const IS_NUMBER_DIVISIBLE_BY_FOUR = "is number divisble by 4";
-export const IS_NUMBER_DIVISIBLE_BY_SIX = "is number divisble by 6";
-export const IS_NUMBER_DIVISIBLE_BY_SEVEN = "is number divisble by 7";
-export const IS_NUMBER_DIVISIBLE_BY_EIGHT = "is number divisble by 8";
-export const IS_NUMBER_DIVISIBLE_BY_NINE = "is number divisble by 9";
-export const IS_NUMBER_DIVISIBLE_ANOTHER_NUMBER =
-  " is number divisible by another number";
-export const IS_NUMBER_PROPORTIONAL_TO_DIGIT =
-  "is number proportional to digit";
-export const IS_DIGIT_PROPORTIONAL_TO_DIGIT = "is digit proportional to digit";
-export const IS_NUMBER_PROPORTIONAL_TO_NUMBER =
-  "is number proportional to number";
-export const ARE_NUMBERS_THE_SAME = "are numbers the same";
-export const ARE_DIGITS_THE_SAME = "are digits the same";
-export const DIGITS_DIFFERENCE = "digits difference";
-export const NUMBERS_DIFFERENCE = "is same difference numbers";
-export const IS_NUMBER_PERFECT_SQUARE = "is number perfect square";
-export const IS_DIGIT_PERFECT_SQUARE = "is digit perfect square";
-export const DO_NUMBERS_SUM_TO_NUMBER = "do numbers sum";
-export const DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER =
-  "do all numbers sum to some number";
-export const DO_DIGITS_SUM_TO_DIGIT = "do digits sum to digit";
-export const DO_DIGITS_SUM_TO_NUMBER = "do digits sum to number";
-export const IS_DIGIT_SQUAREROOT_OF_NUMBER = "is digit squareroot of number";
-export const DIGITS_MULTIPLY_TO_DIGIT = "digits multiply to digit";
-export const NUMBERS_MULTIPLY_TO_NUMBER = "numbers multiply to number";
-export const NUMBER_AND_DIGIT_MULTIPLY_TO_NUMBER =
-  "number and digit multiply to number";
-export const DIGITS_MULTIPLY_TO_NUMBER = "digits multiply to number";
-export const IS_SMALLEST_DIGIT = "is smallest digit";
-export const IS_LARGEST_DIGIT = "is largest digit";
-export const IS_SMALLEST_NUMBER = "is smallest number";
-export const IS_LARGEST_NUMBER = "is largest number";
-export const HOW_MANY_EVEN_ODD_DIGITS = "how many even/odd digits";
-export const DO_ALL_DIGITS_SUM_TO_NUMBER = "do all digits sum to number";
-export const DIFFERENCE_BETWEEN_TWO_NUMBER_PAIRS =
-  "difference between two number pairs";
-export const DIFFERENCE_BETWEEN_TWO_DIGIT_PAIRS =
-  "difference between two digit pairs";
-export const DIFFERENCE_BETWEEN_NUMBER_PAIR_AND_DIGIT_PAIR =
-  "difference between number pair and digit pair";
-export const DIFFERENCE_BETWEEN_TWO_DIGIT_PAIRS_DIVISION =
-  "difference between two digit pairs division";
-export const DIFFERENCE_BETWEEN_TWO_NUMBER_PAIRS_DIVISION =
-  "difference between two number pairs";
+export const DIFFERENCE_BETWEEN_NUMBERS = "difference between numbers";
+export const NUMBERS_SUM_TO = "numbers sum to";
+export const NUMBERS_DIVISIBLE_BY = "numbers divisible by";
+export const IS_PROPORTIONAL_TO = "Is proportional to";
+export const NUMBERS_MULTIPLY_TO = "numbers multiply to";
+export const IS_ODD_OR_EVEN = "is odd or even";
+export const IS_SMALLEST_OR_LARGEST = "is smallest or largest";
+export const IS_NUMBER_SQUARE = "is number square";
+export const MISCELLANEOUS = "miscellaneous";
+
+export const IS_ODD_DIGIT = {
+  description: "is odd digit",
+  group: IS_ODD_OR_EVEN,
+};
+export const IS_EVEN_DIGIT = {
+  description: "is even digit",
+  group: IS_ODD_OR_EVEN,
+};
+export const IS_PRIME_NUMBER = {
+  description: "is prime number",
+  group: MISCELLANEOUS,
+};
+export const IS_PRIME_DIGIT = {
+  description: "is prime digit",
+  group: MISCELLANEOUS,
+};
+export const IS_DIGIT_DIVISIBLE_BY_THREE = {
+  description: "is digit divisible by 3",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_DIGIT_DIVISIBLE_BY_FOUR = {
+  description: "is digit divisble by 4",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_DIGIT_DIVISIBLE_BY_FIVE = {
+  description: "is digit divisble by 5",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_DIGIT_DIVISIBLE_BY_SIX = {
+  description: "is digit divisble by 6",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_DIGIT_DIVISIBLE_BY_SEVEN = {
+  description: "is digit divisble by 7",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_DIGIT_DIVISIBLE_BY_EIGHT = {
+  description: "is digit divisble by 8",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_DIGIT_DIVISIBLE_BY_NINE = {
+  description: "is digit divisble by 9",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_DIVISIBLE_BY_THREE = {
+  description: "is number divisible by 3",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_DIVISIBLE_BY_FOUR = {
+  description: "is number divisble by 4",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_DIVISIBLE_BY_SIX = {
+  description: "is number divisble by 6",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_DIVISIBLE_BY_SEVEN = {
+  description: "is number divisble by 7",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_DIVISIBLE_BY_EIGHT = {
+  description: "is number divisble by 8",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_DIVISIBLE_BY_NINE = {
+  description: "is number divisble by 9",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_DIVISIBLE_ANOTHER_NUMBER = {
+  description: "is number divisible by another number",
+  group: NUMBERS_DIVISIBLE_BY,
+};
+export const IS_NUMBER_PROPORTIONAL_TO_DIGIT = {
+  description: "is number proportional to digit",
+  group: IS_PROPORTIONAL_TO,
+};
+export const IS_DIGIT_PROPORTIONAL_TO_DIGIT = {
+  description: "is digit proportional to digit",
+  group: IS_PROPORTIONAL_TO,
+};
+export const IS_NUMBER_PROPORTIONAL_TO_NUMBER = {
+  description: "is number proportional to number",
+  group: IS_PROPORTIONAL_TO,
+};
+export const ARE_NUMBERS_THE_SAME = {
+  description: "are numbers the same",
+  group: MISCELLANEOUS,
+};
+export const ARE_DIGITS_THE_SAME = {
+  description: "are digits the same",
+  group: MISCELLANEOUS,
+};
+export const DIGITS_DIFFERENCE = {
+  description: "digits difference",
+  group: DIFFERENCE_BETWEEN_NUMBERS,
+};
+export const NUMBERS_DIFFERENCE = {
+  description: "is same difference numbers",
+  group: DIFFERENCE_BETWEEN_NUMBERS,
+};
+export const IS_NUMBER_PERFECT_SQUARE = {
+  description: "is number perfect square",
+  group: IS_NUMBER_SQUARE,
+};
+export const IS_DIGIT_PERFECT_SQUARE = {
+  description: "is digit perfect square",
+  group: IS_NUMBER_SQUARE,
+};
+export const DO_NUMBERS_SUM_TO_NUMBER = {
+  description: "do numbers sum",
+  group: NUMBERS_SUM_TO,
+};
+export const DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER = {
+  description: "do all numbers sum to some number",
+  group: NUMBERS_SUM_TO,
+};
+export const DO_DIGITS_SUM_TO_DIGIT = {
+  description: "do digits sum to digit",
+  group: NUMBERS_SUM_TO,
+};
+export const DO_DIGITS_SUM_TO_NUMBER = {
+  description: "do digits sum to number",
+  group: NUMBERS_SUM_TO,
+};
+export const IS_DIGIT_SQUAREROOT_OF_NUMBER = {
+  description: "is digit squareroot of number",
+  group: IS_NUMBER_SQUARE,
+};
+export const DIGITS_MULTIPLY_TO_DIGIT = {
+  description: "digits multiply to digit",
+  group: NUMBERS_MULTIPLY_TO,
+};
+export const NUMBERS_MULTIPLY_TO_NUMBER = {
+  description: "numbers multiply to number",
+  group: NUMBERS_MULTIPLY_TO,
+};
+export const NUMBER_AND_DIGIT_MULTIPLY_TO_NUMBER = {
+  description: "number and digit multiply to number",
+  group: NUMBERS_MULTIPLY_TO,
+};
+export const DIGITS_MULTIPLY_TO_NUMBER = {
+  description: "digits multiply to number",
+  group: NUMBERS_MULTIPLY_TO,
+};
+export const IS_SMALLEST_DIGIT = {
+  description: "is smallest digit",
+  group: IS_SMALLEST_OR_LARGEST,
+};
+export const IS_LARGEST_DIGIT = {
+  description: "is largest digit",
+  group: IS_SMALLEST_OR_LARGEST,
+};
+export const IS_SMALLEST_NUMBER = {
+  description: "is smallest number",
+  group: IS_SMALLEST_OR_LARGEST,
+};
+export const IS_LARGEST_NUMBER = {
+  description: "is largest number",
+  group: IS_SMALLEST_OR_LARGEST,
+};
+export const HOW_MANY_EVEN_ODD_DIGITS = {
+  description: "how many even/odd digits",
+  group: IS_ODD_OR_EVEN,
+};
+export const DO_ALL_DIGITS_SUM_TO_NUMBER = {
+  decription: "do all digits sum to number",
+  group: NUMBERS_SUM_TO,
+};
+export const DIFFERENCE_BETWEEN_TWO_NUMBER_PAIRS = {
+  description: "difference between two number pairs",
+  group: DIFFERENCE_BETWEEN_NUMBERS,
+};
+export const DIFFERENCE_BETWEEN_TWO_DIGIT_PAIRS = {
+  description: "difference between two digit pairs",
+  group: DIFFERENCE_BETWEEN_NUMBERS,
+};
+export const DIFFERENCE_BETWEEN_NUMBER_PAIR_AND_DIGIT_PAIR = {
+  description: "difference between number pair and digit pair",
+  group: DIFFERENCE_BETWEEN_NUMBERS,
+};
+export const DIFFERENCE_BETWEEN_TWO_DIGIT_PAIRS_DIVISION = {
+  description: "difference between two digit pairs division",
+  group: DIFFERENCE_BETWEEN_NUMBERS,
+};
+export const DIFFERENCE_BETWEEN_TWO_NUMBER_PAIRS_DIVISION = {
+  description: "difference between two number pairs",
+  group: DIFFERENCE_BETWEEN_NUMBERS,
+};
+
+export const CLUE_CATEGORY_GROUPS = {
+  [DIFFERENCE_BETWEEN_NUMBERS]: { count: 0 },
+  [NUMBERS_DIVISIBLE_BY]: { count: 0 },
+  [NUMBERS_SUM_TO]: { count: 0 },
+  [NUMBERS_MULTIPLY_TO]: { count: 0 },
+  [IS_PROPORTIONAL_TO]: { count: 0 },
+  [IS_ODD_OR_EVEN]: { count: 0 },
+  [IS_SMALLEST_OR_LARGEST]: { count: 0 },
+  [IS_NUMBER_SQUARE]: { count: 0 },
+  [MISCELLANEOUS]: { count: 0 },
+};
 
 export const NUMBER_DIGIT_REQS = {
   [IS_ODD_DIGIT]: DIGIT,

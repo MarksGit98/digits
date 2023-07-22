@@ -159,7 +159,9 @@ h3 {
 
     &.correct-guess {
       background-color: orange;
-      color: #fff;
+      input {
+        color: #fff; /* Set the text color for the input value */
+      }
     }
   }
 
@@ -170,10 +172,7 @@ h3 {
     padding: 5px;
     font-size: 28px;
     font-family: "Press Start 2P", sans-serif;
-
-    &.correct-guess {
-      color: #fff;
-    }
+    border: none;
   }
 
   &.active {
