@@ -1,4 +1,4 @@
-const checkIfEven = (
+export const checkIfEven = (
   number1,
   number2 = null,
   number3 = null,
@@ -16,7 +16,7 @@ const checkIfEven = (
   return allEven;
 };
 
-const checkIfOdd = (
+export const checkIfOdd = (
   number1,
   number2 = null,
   number3 = null,
@@ -34,7 +34,7 @@ const checkIfOdd = (
   return allOdd;
 };
 
-const checkIfPrime = (number1, number2 = null) => {
+export const checkIfPrime = (number1, number2 = null) => {
   if (number1 < 2) {
     return false;
   }
@@ -59,26 +59,30 @@ const checkIfPrime = (number1, number2 = null) => {
   return true;
 };
 
-const checkIfDivisibleBy = (divisor, number1, number2 = null) => {
+export const checkIfDivisibleBy = (divisor, number1, number2 = null) => {
   return number1 % divisor === 0 && (number2 ? number2 % divisor === 0 : true);
 };
 
-const checkIfSquareRootOf = (number1, number2) => {
+export const checkIfSquareRootOf = (number1, number2) => {
   return Math.sqrt(number2) === number1;
 };
 
-const checkIfTheSame = (number1, number2, number3 = null) => {
+export const checkIfTheSame = (number1, number2, number3 = null) => {
   if (number3) {
     return number1 === number2 && number2 === number3;
   }
   return number1 === number2;
 };
 
-const checkIfNumbersSum = (number1, number2, number3) => {
+export const checkIfNumbersSum = (number1, number2, number3) => {
   return number1 + number2 === number3;
 };
 
-const checkIfPerfectSquare = (number1, number2 = null, number3 = null) => {
+export const checkIfPerfectSquare = (
+  number1,
+  number2 = null,
+  number3 = null
+) => {
   return (
     Math.sqrt(number1) % 1 === 0 &&
     (number2 ? Math.sqrt(number2) % 1 === 0 : true) &&
@@ -86,7 +90,7 @@ const checkIfPerfectSquare = (number1, number2 = null, number3 = null) => {
   );
 };
 
-const checkHowManyPerfectSquares = (total, numbers) => {
+export const checkHowManyPerfectSquares = (total, numbers) => {
   let perfectSquareCount = 0;
   for (let num of numbers) {
     if (checkIfPerfectSquare(num)) {
@@ -96,18 +100,23 @@ const checkHowManyPerfectSquares = (total, numbers) => {
   return perfectSquareCount === total;
 };
 
-const checkIfSameDifference = (number1, number2, number3, number4 = null) => {
+export const checkIfSameDifference = (
+  number1,
+  number2,
+  number3,
+  number4 = null
+) => {
   if (number4) {
     return Math.abs(number1 - number2) === Math.abs(number3 - number4);
   }
   return Math.abs(number1 - number2) === Math.abs(number2 - number3);
 };
 
-const checkIfProportionalBy = (factor, number1, number2) => {
+export const checkIfProportionalBy = (factor, number1, number2) => {
   return number1 * factor === number2;
 };
 
-const checkIfSameDifferenceDivision = (
+export const checkIfSameDifferenceDivision = (
   number1,
   number2,
   number3,
@@ -118,7 +127,7 @@ const checkIfSameDifferenceDivision = (
   }
   return number1 / number2 === number2 / number3;
 };
-const checkIfDifferenceByFactor = (
+export const checkIfDifferenceByFactor = (
   factor,
   number1,
   number2,
@@ -131,7 +140,7 @@ const checkIfDifferenceByFactor = (
   return factor * Math.abs(number1 - number2) === Math.abs(number2 - number3);
 };
 
-const checkIfSmallest = (
+export const checkIfSmallest = (
   number1,
   number2,
   number3,
@@ -151,7 +160,7 @@ const checkIfSmallest = (
   return number1 < number2 && number1 < number3;
 };
 
-const checkIfLargest = (
+export const checkIfLargest = (
   number1,
   number2,
   number3,
@@ -171,13 +180,13 @@ const checkIfLargest = (
   return number1 > number2 && number1 > number3;
 };
 
-const checkIfAnyPrime = (number1, number2, number3) => {
+export const checkIfAnyPrime = (number1, number2, number3) => {
   return (
     checkIfPrime(number1) || checkIfPrime(number2) || checkIfPrime(number3)
   );
 };
 
-const checkHowManyPrime = (total, numbers) => {
+export const checkHowManyPrime = (total, numbers) => {
   let primeCount = 0;
   for (let num of numbers) {
     if (checkIfPrime(num)) {
@@ -187,7 +196,7 @@ const checkHowManyPrime = (total, numbers) => {
   return primeCount === total;
 };
 
-const checkHowManyEven = (total, numbers) => {
+export const checkHowManyEven = (total, numbers) => {
   let evenCount = 0;
   for (let num of numbers) {
     if (checkIfEven(num)) {
@@ -197,7 +206,7 @@ const checkHowManyEven = (total, numbers) => {
   return evenCount === total;
 };
 
-const checkIfAllEven = (
+export const checkIfAllEven = (
   number1,
   number2,
   number3,
@@ -215,7 +224,7 @@ const checkIfAllEven = (
   );
 };
 
-const checkHowManyOdd = (total, numbers) => {
+export const checkHowManyOdd = (total, numbers) => {
   let oddCount = 0;
   for (let num of numbers) {
     if (checkIfOdd(num)) {
@@ -225,7 +234,7 @@ const checkHowManyOdd = (total, numbers) => {
   return oddCount === total;
 };
 
-const checkIfAllOdd = (
+export const checkIfAllOdd = (
   number1,
   number2,
   number3,
@@ -243,36 +252,11 @@ const checkIfAllOdd = (
   );
 };
 
-const checkIfAllNumbersSumToSomeNumber = (
+export const checkIfAllNumbersSumToSomeNumber = (
   number1,
   number2,
   number3,
   someNumber
 ) => {
   return number1 + number2 + number3 === someNumber;
-};
-
-module.exports = {
-  checkIfEven,
-  checkIfOdd,
-  checkIfPrime,
-  checkHowManyPrime,
-  checkIfDivisibleBy,
-  checkIfSquareRootOf,
-  checkIfTheSame,
-  checkIfNumbersSum,
-  checkIfPerfectSquare,
-  checkIfSameDifference,
-  checkIfSameDifferenceDivision,
-  checkIfDifferenceByFactor,
-  checkIfProportionalBy,
-  checkIfSmallest,
-  checkIfLargest,
-  checkIfAnyPrime,
-  checkHowManyEven,
-  checkIfAllEven,
-  checkHowManyOdd,
-  checkIfAllOdd,
-  checkHowManyPerfectSquares,
-  checkIfAllNumbersSumToSomeNumber,
 };

@@ -10,4 +10,15 @@ export const puzzles = [
       `The 4th digit is divisible by 3`,
     ],
   },
+  {
+    puzzle: [2, 9, 4, 3, 8, 1],
+    clues: [
+      "Only one of the three numbers is a perfect square",
+      "Half of the digits are even and half of the digits are odd",
+      "The 4th digit is the square root of the 2nd digit",
+      "The 2nd number is prime",
+      "The 1st number is the smallest of the three numbers",
+      "The 5th and 6th digits sum to the 2nd digit",
+    ],
+  },
 ];

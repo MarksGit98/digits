@@ -67,10 +67,6 @@ import {
   DIFFERENCE_BETWEEN_NUMBER_PAIR_AND_DIGIT_PAIR,
   DIFFERENCE_BETWEEN_TWO_DIGIT_PAIRS_DIVISION,
   DIFFERENCE_BETWEEN_TWO_NUMBER_PAIRS_DIVISION,
-  NUMBER_DIGIT_REQS,
-  DIGIT,
-  NUMBER,
-  DIGIT_AND_NUMBER,
   DO_ALL_NUMBERS_SUM_TO_SOME_NUMBER,
   MAX_GUESS_AMOUNT,
   CLUE_CATEGORY_GROUPS,
@@ -501,7 +497,7 @@ const generateClues = (
     {
       clue: `The ${numberToTextConversion(
         DIGIT_ONE
-      )} digit is the smallest of the 6 digits`,
+      )} digit is the smallest of the six digits`,
       used: false,
       type: IS_SMALLEST_DIGIT,
       evaluation: checkIfSmallest(
@@ -516,7 +512,7 @@ const generateClues = (
     {
       clue: `The ${numberToTextConversion(
         DIGIT_ONE
-      )} digit is the largest of the 6 digits`,
+      )} digit is the largest of the six digits`,
       used: false,
       type: IS_LARGEST_DIGIT,
       evaluation: checkIfLargest(
@@ -531,7 +527,7 @@ const generateClues = (
     {
       clue: `The ${numberToTextConversion(
         NUMBER_ONE
-      )} number is the smallest of the 3 numbers`,
+      )} number is the smallest of the three numbers`,
       used: false,
       type: IS_SMALLEST_NUMBER,
       evaluation: checkIfSmallest(number1, number2, number3),
@@ -539,7 +535,7 @@ const generateClues = (
     {
       clue: `The ${numberToTextConversion(
         NUMBER_ONE
-      )} number is the largest of the 3 numbers`,
+      )} number is the largest of the three numbers`,
       used: false,
       type: IS_LARGEST_NUMBER,
       evaluation: checkIfLargest(number1, number2, number3),

@@ -5,8 +5,20 @@
     url("../fonts/PRESSSTART2P-REGULAR.TTF") format("woff");
 }
 
+@font-face {
+  font-family: "arcade-classic";
+  src: url("../fonts/ARCADECLASSIC.TTF") format("woff2"),
+    url("../fonts/ARCADECLASSIC.TTF") format("woff");
+}
+
+@font-face {
+  font-family: "kong-text";
+  src: url("../fonts/kongtext.ttf") format("woff2"),
+    url("../fonts/kongtext.ttf") format("woff");
+}
+
 .GameScreen {
-  // font-family: "Press Start 2P", sans-serif;
+  font-family: "kong-text", sans-serif;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
@@ -262,7 +274,7 @@ h3 {
     }
 
     .clue-text {
-      font-size: 18px;
+      font-size: 14px;
       flex-grow: 1;
       white-space: normal;
       margin-left: 5px;
